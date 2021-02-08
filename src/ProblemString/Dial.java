@@ -11,54 +11,51 @@ public class Dial {
         char[] wordCharArr = br.readLine().toCharArray();
         br.close();
         for (char word : wordCharArr) {
-            switch (word) {
-                case 'A':
-                case 'B':
-                case 'C':
-                    second += 2;
-                    break;
-                case 'D':
-                case 'E':
-                case 'F':
-                    second += 3;
-                    break;
-                case 'G':
-                case 'H':
-                case 'I':
-                    second += 4;
-                    break;
-                case 'J':
-                case 'K':
-                case 'L':
-                    second += 5;
-                    break;
-                case 'M':
-                case 'N':
-                case 'O':
-                    second += 6;
-                    break;
-                case 'P':
-                case 'Q':
-                case 'R':
-                case 'S':
-                    second += 7;
-                    break;
-                case 'T':
-                case 'U':
-                case 'V':
-                    second += 8;
-                    break;
-                case 'W':
-                case 'X':
-                case 'Y':
-                case 'Z':
-                    second += 9;
-                    break;
-            }
+            second += dialNum(word);
         }
 
         bw.write(String.valueOf(second + wordCharArr.length));
         bw.flush();
         bw.close();
+    }
+
+    public static int dialNum(char alphabet) {
+        switch (alphabet) {
+            case 'A':
+            case 'B':
+            case 'C':
+                return 2;
+            case 'D':
+            case 'E':
+            case 'F':
+                return 3;
+            case 'G':
+            case 'H':
+            case 'I':
+                return 4;
+            case 'J':
+            case 'K':
+            case 'L':
+                return 5;
+            case 'M':
+            case 'N':
+            case 'O':
+                return 6;
+            case 'P':
+            case 'Q':
+            case 'R':
+            case 'S':
+                return 7;
+            case 'T':
+            case 'U':
+            case 'V':
+                return 8;
+            case 'W':
+            case 'X':
+            case 'Y':
+            case 'Z':
+                return 9;
+        }
+        return 0;
     }
 }
