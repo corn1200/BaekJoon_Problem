@@ -1,6 +1,7 @@
 package ProblemBasicMath1;
 
 import java.io.*;
+import java.util.LinkedList;
 
 public class BeWomenChairman {
     public static void main(String[] args) throws IOException {
@@ -12,17 +13,25 @@ public class BeWomenChairman {
         for (int i = 0; i < T; i++) {
             int K = Integer.parseInt(br.readLine());
             int n = Integer.parseInt(br.readLine());
-
+            int residentNum = 0;
+            LinkedList<Integer> list = new LinkedList<>();
+            for (int j = 1; j <= n; j++) {
+                list.addLast(j);
+            }
+            for (int j = 0; j < K; j++) {
+                for (int k = 0; k < n; k++) {
+                    residentNum += list.removeFirst();
+                    list.addLast(residentNum);
+                }
+                if (j < K - 1) {
+                    residentNum = 0;
+                }
+            }
+            bw.write(residentNum + "\n");
         }
-//        0층의 5호의 사람 5
-//        1 2 3 4 5
-//        1층의 5호의 사람 15 이전호 + 10
-//        1 3 6 10 15
-//        2층의 5호의 사람 35 이전호 + 20
-//        1 4 10 20 35
-//        3층의 5호의 사람 70 이전호 + 35
-//        1 5 15 35 70
-//        4층의 5호의 사람 126 이전호 + 56
-//        1 6 21 56 126
+        br.close();
+        bw.flush();
+        bw.close();
     }
+
 }
