@@ -1,4 +1,4 @@
-package ProblemBasicMath1;
+package ProblemBasicMath2;
 
 import java.io.*;
 import java.util.Arrays;
