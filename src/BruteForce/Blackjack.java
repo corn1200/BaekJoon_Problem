@@ -20,15 +20,14 @@ public class Blackjack {
         }
 
         for (int i = 0; i < cardArr.length; i++) {
-            int num = cardArr[i];
             for (int j = i + 1; j < cardArr.length; j++) {
-                if (num + cardArr[j] >= M) {
+                if (cardArr[i] + cardArr[j] >= M) {
                     continue;
                 }
-                num = cardArr[i] + cardArr[j];
                 for (int k = j + 1; k < cardArr.length; k++) {
-                    if (num + cardArr[k] <= M && num + cardArr[k] > max) {
-                        max = num + cardArr[k];
+                    int num = cardArr[i] + cardArr[j] + cardArr[k];
+                    if (num <= M && num > max) {
+                        max = num;
                     }
                 }
             }
