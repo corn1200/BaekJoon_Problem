@@ -22,14 +22,12 @@ public class Big {
         for (int i = 0; i < N; i++) {
             int rank = 0;
             for (int j = 0; j < N; j++) {
-                if ((infoArr[0][i] < infoArr[0][j] && infoArr[1][i] <= infoArr[1][j]) ||
-                        (infoArr[1][i] < infoArr[1][j] && infoArr[0][i] <= infoArr[0][j])) {
+                if (infoArr[0][i] < infoArr[0][j] && infoArr[1][i] < infoArr[1][j]) {
                     rank++;
                 }
             }
-            bw.write(rank + 1 + " ");
+            bw.write((rank + 1) + " ");
         }
-
         bw.flush();
         bw.close();
     }
