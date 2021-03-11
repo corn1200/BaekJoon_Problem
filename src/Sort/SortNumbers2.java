@@ -18,5 +18,6 @@ public class SortNumbers2 {
         }
         bw.flush();
         bw.close();
+//        그냥 똑같은 문제
     }
 }
