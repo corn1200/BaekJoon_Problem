@@ -17,25 +17,7 @@ public class AligningCoordinates {
             location[1][i] = Integer.parseInt(stk.nextToken());
         }
 
-        for (int i = N - 1; i >= 0; i--) {
-            for (int j = 0; j < i; j++) {
-                if (location[1][j] > location[1][j + 1]) {
-                    int temp = location[1][j];
-                    location[1][j] = location[1][j + 1];
-                    location[1][j + 1] = temp;
-                }
-            }
-        }
-
-        for (int i = N - 1; i >= 0; i--) {
-            for (int j = 0; j < i; j++) {
-                if (location[0][j] > location[0][j + 1]) {
-                    int temp = location[0][j];
-                    location[0][j] = location[0][j + 1];
-                    location[0][j + 1] = temp;
-                }
-            }
-        }
+        quickSort(location, 0, N - 1);
 
         for (int i = 0; i < N; i++) {
             bw.write(location[0][i] + " " + location[1][i] + "\n");
@@ -43,5 +25,41 @@ public class AligningCoordinates {
 
         bw.flush();
         bw.close();
+    }
+
+    static void quickSort(int[][] arr, int left, int right) {
+        if (left >= right) {
+            return;
+        }
+
+        int pi = partition(arr, left, right);
+        quickSort(arr, left, pi - 1);
+        quickSort(arr, pi + 1, right);
+    }
+
+    static int partition(int[][] arr, int left, int right) {
+        int pivot = arr[0][(left + right) / 2];
+        int pivot2 = arr[1][(left + right) / 2];
+        int i = left, j = right;
+
+        while (i < j) {
+            while (pivot < arr[0][j] || (pivot == arr[0][j] && pivot2 < arr[1][j])) {
+                j--;
+            }
+
+            while (i < j && (pivot > arr[0][i] || (pivot == arr[0][i] && pivot2 > arr[1][i]))) {
+                i++;
+            }
+            swap(arr, i, j);
+        }
+        return i;
+    }
+
+    static void swap(int[][] arr, int i, int j) {
+        int temp = arr[0][i], temp2 = arr[1][i];
+        arr[0][i] = arr[0][j];
+        arr[1][i] = arr[1][j];
+        arr[0][j] = temp;
+        arr[1][j] = temp2;
     }
 }
