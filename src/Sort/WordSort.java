@@ -8,40 +8,53 @@ public class WordSort {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
         int N = Integer.parseInt(br.readLine());
-        String[] strArr = new String[N];
-        for (int i = 0; i < strArr.length; i++) {
-            strArr[i] = br.readLine();
+        String[] arr = new String[N];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = br.readLine();
         }
-        br.close();
 
-        quickSort(strArr, 0, strArr.length);
+        quickSort(arr, 0, arr.length - 1);
 
+        for (String str : arr) {
+            bw.write(str + "\n");
+        }
         bw.flush();
         bw.close();
     }
 
-    static void quickSort(String[] strArr, int left, int right) {
+    static void quickSort(String[] arr, int left, int right) {
         if (left >= right) {
             return;
         }
 
-        int pi = partition(strArr, left, right);
-        quickSort(strArr, left, pi - 1);
-        quickSort(strArr, pi + 1, right);
+        int pi = partition(arr, left, right);
+
+        quickSort(arr, left, pi - 1);
+        quickSort(arr, pi + 1, right);
     }
 
-    static int partition(String[] strArr, int left, int right) {
-        String pivot = strArr[(left + right) / 2];
+    static int partition(String[] arr, int left, int right) {
+        String pivot = arr[left];
         int i = left, j = right;
 
         while (i < j) {
-            while (pivot.length() < strArr[j].length()) {
+            while (pivot.length() < arr[j].length()) {
                 j--;
             }
 
-            while (i < j && pivot.length() >= strArr[i].length()) {
+            while (i < j && pivot.length() >= arr[i].length()) {
                 i++;
             }
+            swap(arr, i, j);
         }
+        arr[left] = arr[i];
+        arr[i] = pivot;
+        return i;
+    }
+
+    static void swap(String[] arr, int i, int j) {
+        String temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
     }
 }
