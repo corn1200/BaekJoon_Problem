@@ -1,6 +1,8 @@
 package Sort;
 
 import java.io.*;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 
 public class WordSort {
@@ -16,7 +18,13 @@ public class WordSort {
         }
         br.close();
 
-        quickSort(arr, 0, arr.length - 1);
+        Arrays.sort(arr, (o1, o2) -> {
+            if (o1.length() == o2.length()) {
+                return o1.compareTo(o2);
+            } else {
+                return o1.length() - o2.length();
+            }
+        });
 
         for (String str : arr) {
             if (!map.containsKey(str)) {
@@ -26,41 +34,5 @@ public class WordSort {
         }
         bw.flush();
         bw.close();
-    }
-
-    static void quickSort(String[] arr, int left, int right) {
-        if (left >= right) {
-            return;
-        }
-
-        int pi = partition(arr, left, right);
-
-        quickSort(arr, left, pi - 1);
-        quickSort(arr, pi + 1, right);
-    }
-
-    static int partition(String[] arr, int left, int right) {
-        String pivot = arr[left];
-        int i = left, j = right;
-
-        while (i < j) {
-            while (pivot.length() < arr[j].length() || (pivot.length() == arr[j].length() && pivot.compareTo(arr[j]) < 0)) {
-                j--;
-            }
-
-            while (i < j && (pivot.length() >= arr[i].length() || (pivot.length() == arr[j].length() && pivot.compareTo(arr[j]) > 0))) {
-                i++;
-            }
-            swap(arr, i, j);
-        }
-        arr[left] = arr[i];
-        arr[i] = pivot;
-        return i;
-    }
-
-    static void swap(String[] arr, int i, int j) {
-        String temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
     }
 }
